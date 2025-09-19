@@ -1,0 +1,641 @@
+<title>Store - Matrix Optimizer</title>
+<div class="container my-2">
+
+
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+	      <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<!-- Load the primary CSS first ... -->
+<!-- ... and then the alternate CSS first as a snap-on for dark color scheme preference -->
+	  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	      <link rel="stylesheet" href="assets/style.css?v=5">
+
+	  <style>
+		  
+        .connect-button a {
+            display: inline-block;
+            background-color: #7289da;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .connect-button a:hover {
+            background-color: #5b6eae;
+        }
+    </style>
+	  <link href='https://unpkg.com/gridjs/dist/theme/mermaid.min.css' rel='stylesheet'>
+  <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
+  </head>
+  
+
+
+  <body class="d-flex flex-column h-100">
+    
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+	  <div class="container">
+    <a class="navbar-brand" href="index.php">Matrix Regedit</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+     
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item ">
+        <a class="nav-link" href="index.php">Dashboard <span class="sr-only"></span></a>
+    </li>
+    <li class="nav-item active font-weight-bold">
+        <a class="nav-link" href="store.php">Store <span class="sr-only"></span></a>
+    </li>
+    <li class="nav-item ">
+        <a class="nav-link" href="orders.php">Orders</a>
+    </li>
+    <li class="nav-item ">
+        <a class="nav-link" href="redeem.php">Redeem</a>
+    </li>
+	<li class="nav-item ">
+        <a class="nav-link" href="download.php">Download</a>
+    </li>
+	
+	<li class="nav-item ">
+        <a class="nav-link" href="guide.php">Guides</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="?action=logout">Logout (0xdeadw4r)</a>
+    </li>
+</ul>
+
+
+    </div>
+	  </div>
+  </nav>
+</header>
+
+<main role="main" class="flex-shrink-0 ">
+<div class="padding-extra">
+
+
+
+<style>
+body {
+    font-family: 'Roboto', sans-serif;
+}
+a {
+    text-decoration: none;
+}
+.product-card {
+    box-shadow: 0 2px 7px #dfdfdf;
+    background: #fafafa;
+}
+.badge {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    background: red;
+    color: #fff;
+    padding: 3px 10px;
+}
+.product-tumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    padding: 50px;
+    background: #f0f0f0;
+}
+.product-tumb img {
+    max-width: 100%;
+    max-height: 100%;
+}
+.product-details {
+    padding: 30px;
+}
+.product-catagory {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ccc;
+    margin-bottom: 18px;
+}
+.product-details h4 a {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    color: #363636;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.product-details h4 a:hover {
+    color: #fbb72c;
+}
+.product-details p {
+    font-size: 15px;
+    line-height: 22px;
+    margin-bottom: 18px;
+    color: #999;
+}
+.product-bottom-details {
+    overflow: hidden;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+.product-bottom-details div {
+    float: left;
+    width: 50%;
+}
+.product-price {
+    font-size: 18px;
+    color: #fbb72c;
+    font-weight: 600;
+}
+.product-price small {
+    font-size: 80%;
+    font-weight: 400;
+    text-decoration: line-through;
+    display: inline-block;
+    margin-right: 5px;
+}
+.product-links {
+    text-align: right;
+}
+.product-links a {
+    display: inline-block;
+    margin-left: 5px;
+    color: #e1e1e1;
+    transition: 0.3s;
+    font-size: 17px;
+}
+.product-links a:hover {
+    color: #fbb72c;
+}
+</style>
+<style>
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .product-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .price-section {
+    word-break: break-word;
+    white-space: normal;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .product-card img {
+    border-radius: 5px;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+</style>
+<style>
+        /* Encapsulated Single Product Styles */
+        .matrix-single-container {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: #374151;
+        }
+
+        .matrix-single-container * {
+            box-sizing: border-box;
+        }
+
+        .matrix-back-btn {
+            display: inline-flex;
+            align-items: center;
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            transition: color 0.2s ease;
+        }
+
+        .matrix-back-btn:hover {
+            color: #374151;
+            text-decoration: none;
+        }
+
+        .matrix-back-btn::before {
+            content: '←';
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .matrix-product-details-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .matrix-product-details-image {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .matrix-product-details-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .matrix-product-details-content {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .matrix-product-details-category {
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: #6b7280;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .matrix-product-details-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+        }
+
+        .matrix-pricing-details {
+            margin-bottom: 32px;
+        }
+
+        .matrix-pricing-details .matrix-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f3f4f6;
+            font-size: 16px;
+        }
+
+        .matrix-pricing-details .matrix-price-row:last-child {
+            border-bottom: none;
+        }
+
+        .matrix-pricing-details .matrix-price-label {
+            font-size: 16px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .matrix-pricing-details .matrix-price-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        /* Purchase Form */
+        .matrix-purchase-form {
+            margin-bottom: 24px;
+        }
+
+        .matrix-form-group {
+            margin-bottom: 20px;
+        }
+
+        .matrix-form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .matrix-form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: white;
+            color: #374151;
+            transition: border-color 0.2s ease;
+        }
+
+        .matrix-form-select:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .matrix-terms-text {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .matrix-terms-text a {
+            color: #4f46e5;
+            text-decoration: none;
+        }
+
+        .matrix-terms-text a:hover {
+            text-decoration: underline;
+        }
+
+        .matrix-purchase-btn {
+            width: 100%;
+            padding: 14px 20px;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .matrix-purchase-btn:hover {
+            background-color: #4338ca;
+            transform: translateY(-1px);
+        }
+
+        .matrix-purchase-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .matrix-product-details-container {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .matrix-product-details-content {
+                padding: 24px;
+            }
+
+            .matrix-product-details-title {
+                font-size: 24px;
+            }
+
+            .matrix-product-details-image {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .matrix-product-details-content {
+                padding: 20px;
+            }
+
+            .matrix-product-details-image {
+                padding: 20px;
+            }
+        }
+    </style>
+<div class="row">
+  	
+          <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+        <div class="product-card my-2 w-100">
+          <div>
+            <img class="img-fluid" src="assets/matrix-banner.png" alt="Matrix Streamer,Supreme &amp; Essential">
+          </div>
+          <div class="product-details">
+            <div>
+              <span class="product-catagory">Software</span>
+              <h4><a href="#">Matrix Streamer,Supreme &amp; Essential</a></h4>
+
+              
+              <div class="price-section">
+                <strong>Monthly Price:</strong> ₹ 4,300.00              <br>
+                <strong>Lifetime Price:</strong> ₹ 8,300.00               
+              </div>
+            </div>
+
+            <div>
+              <a class="btn btn-dark w-100 rounded-bottom py-2" href="?code=streamer">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+          <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+        <div class="product-card my-2 w-100">
+          <div>
+            <img class="img-fluid" src="assets/matrix-banner.png" alt="Matrix Supreme">
+          </div>
+          <div class="product-details">
+            <div>
+              <span class="product-catagory">Software</span>
+              <h4><a href="#">Matrix Supreme</a></h4>
+
+              
+              <div class="price-section">
+                <strong>Monthly Price:</strong> ₹ 900.00              <br>
+                <strong>Lifetime Price:</strong> ₹ 2,500.00               
+              </div>
+            </div>
+
+            <div>
+              <a class="btn btn-dark w-100 rounded-bottom py-2" href="?code=supreme">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+          <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+        <div class="product-card my-2 w-100">
+          <div>
+            <img class="img-fluid" src="assets/matrix-banner.png" alt="Matrix Essential">
+          </div>
+          <div class="product-details">
+            <div>
+              <span class="product-catagory">Software</span>
+              <h4><a href="#">Matrix Essential</a></h4>
+
+              
+              <div class="price-section">
+                <strong>Monthly Price:</strong> ₹ 900.00              <br>
+                <strong>Lifetime Price:</strong> ₹ 2,500.00               
+              </div>
+            </div>
+
+            <div>
+              <a class="btn btn-dark w-100 rounded-bottom py-2" href="?code=essential">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+          <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+        <div class="product-card my-2 w-100">
+          <div>
+            <img class="img-fluid" src="assets/matrix-banner.png" alt="Matrix Supreme &amp; Essential">
+          </div>
+          <div class="product-details">
+            <div>
+              <span class="product-catagory">Software</span>
+              <h4><a href="#">Matrix Supreme &amp; Essential</a></h4>
+
+              
+              <div class="price-section">
+                <strong>Monthly Price:</strong> ₹ 1,200.00              <br>
+                <strong>Lifetime Price:</strong> ₹ 3,700.00               
+              </div>
+            </div>
+
+            <div>
+              <a class="btn btn-dark w-100 rounded-bottom py-2" href="?code=supreme_essential">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+          <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+        <div class="product-card my-2 w-100">
+          <div>
+            <img class="img-fluid" src="assets/matrix-banner.png" alt="Matrix Legit &amp; Supreme">
+          </div>
+          <div class="product-details">
+            <div>
+              <span class="product-catagory">Software</span>
+              <h4><a href="#">Matrix Legit &amp; Supreme</a></h4>
+
+              
+              <div class="price-section">
+                <strong>Monthly Price:</strong> ₹ 1,200.00              <br>
+                <strong>Lifetime Price:</strong> ₹ 3,700.00               
+              </div>
+            </div>
+
+            <div>
+              <a class="btn btn-dark w-100 rounded-bottom py-2" href="?code=legit">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+          <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+        <div class="product-card my-2 w-100">
+          <div>
+            <img class="img-fluid" src="assets/matrix-banner.png" alt="Matrix External">
+          </div>
+          <div class="product-details">
+            <div>
+              <span class="product-catagory">Software</span>
+              <h4><a href="#">Matrix External</a></h4>
+
+              
+              <div class="price-section">
+                <strong>Monthly Price:</strong> ₹ 950.00              <br>
+                <strong>Lifetime Price:</strong> ₹ 4,500.00               
+              </div>
+            </div>
+
+            <div>
+              <a class="btn btn-dark w-100 rounded-bottom py-2" href="?code=external">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+          <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+        <div class="product-card my-2 w-100">
+          <div>
+            <img class="img-fluid" src="assets/matrix-banner.png" alt="Matrix Streamer Pro">
+          </div>
+          <div class="product-details">
+            <div>
+              <span class="product-catagory">Software</span>
+              <h4><a href="#">Matrix Streamer Pro</a></h4>
+
+              
+              <div class="price-section">
+                <strong>Monthly Price:</strong> ₹ 16,500.00              <br>
+                <strong>Lifetime Price:</strong> ₹ 16,500.00               
+              </div>
+            </div>
+
+            <div>
+              <a class="btn btn-dark w-100 rounded-bottom py-2" href="?code=streamer_pro">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+
+</div>
+
+
+
+</div>
+</main>
+<div class="mt-auto">
+  <section class="contact-area" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="contact-content text-center py-3">
+						<div class="mt-2 mb-4">
+                        <a href="#" ><img height="72px" width="auth" src="assets/logo-lg.png" alt="logo"></a></div>
+                        <div class="hr"></div>
+                        <h6><a class="text-white" href="https://discord.gg/matrixregedit" target="_blank"><b>Discord Support</b></a></h6>
+                        <div class="contact-social">
+                            <ul style="list-style: none;margin:0px;padding:0px">
+                                <li><a class="hover-target" href="https://discord.gg/matrixregedit" target="_blank"><i class="bi bi-discord"></i></a></li>
+                                <li><a class="hover-target" href="https://t.me/matrixregedit" target="_blank"><i class="bi bi-telegram"></i></a></li>
+                                <li><a class="hover-target" href="https://youtube.com/@matrixregedit" target="_blank"><i class="bi bi-youtube"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>Copyright &copy; 2024 Matrix Regedit, All Rights Reserved.</p>
+    </footer>
+</div>
+</main>
+
+
+  </body>
+
+<script async
+  src="https://agent-f2e713d3bcc603ce46cc-qdm9i.ondigitalocean.app/static/chatbot/widget.js"
+  data-agent-id="ced97133-025d-11f0-bf8f-4e013e2ddde4"
+  data-chatbot-id="Xc5BYuzrHG5u9QMeuAtv41R8N2_vnDAJ"
+  data-name="Matirx AI Assistant"
+  data-primary-color="#5D3FD3"
+  data-secondary-color="#E5E8ED"
+  data-button-background-color="#0061EB"
+  data-starting-message="Hello! How can I help you today?"
+  data-logo="/static/chatbot/icons/default-agent.svg">
+</script>
+	
+    
+  <!-- Jquery script -->
+ <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<!--Start of Tawk.to Script-->
+<!--End of Tawk.to Script-->
+</html>
